@@ -3,23 +3,12 @@ from openai import OpenAI
 import time
 from datetime import datetime
 import requests
-import os
-from dotenv import load_dotenv
 
 app = Flask(__name__)
 
-# Load environment variables from .env file
-load_dotenv()
-
-# Set API keys from environment variables
-api_key = os.getenv("OPENAI_API_KEY")
-weather_api_key = os.getenv("WEATHER_API_KEY")
-
-# Check if API keys were loaded correctly
-if not api_key or not weather_api_key:
-    raise ValueError("API keys not found. Make sure they are in the .env file.")
-
 # Initialize OpenAI client
+api_key = "YOUR_OPENAI_API_KEY"
+weather_api_key = "YOUR_WEATHER_API_KEY"
 client = OpenAI(api_key=api_key)
 
 @app.route("/")
@@ -76,6 +65,3 @@ def openAI():
     }
 
     return jsonify(response_json)
-
-if __name__ == "__main__":
-    app.run()
