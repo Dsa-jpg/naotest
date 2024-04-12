@@ -26,9 +26,9 @@ processing_times = []
 delivery_times = []
 openai_responses = []  # Ukládáme odpovědi od OpenAI API
 
-@app.route('/')
+@app.route("/")
 def home():
-    return 'Hello World'
+    return f"<h1>Hello world, Flask on Azure Web App!</h1><hr/>Current clock time is: {datetime.datetime.utcnow()}"
 
 
 @app.route('/openAI', methods=['GET', 'POST'])
