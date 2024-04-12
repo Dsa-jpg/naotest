@@ -7,8 +7,8 @@ import requests
 app = Flask(__name__)
 
 # Initialize OpenAI client
-api_key = "YOUR_OPENAI_API_KEY"
-weather_api_key = "YOUR_WEATHER_API_KEY"
+api_key = os.environ.get("OPENAI_API_KEY")
+weather_api_key = os.environ.get("WEATHER_API_KEY")
 client = OpenAI(api_key=api_key)
 
 @app.route("/")
