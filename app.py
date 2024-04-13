@@ -3,6 +3,7 @@ from openai import OpenAI
 import time
 from datetime import datetime
 import requests
+import os
 
 app = Flask(__name__)
 
