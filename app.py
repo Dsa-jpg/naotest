@@ -11,21 +11,19 @@ api_key = os.environ.get("OPENAI_API_KEY")
 weather_api_key = os.environ.get("WEATHER_API_KEY")
 client = OpenAI(api_key=api_key)
 
+
 @app.route("/")
 def home():
     return "<h1>Hello world, Flask on Azure Web App!</h1>"
 
-@app.route('/openAI', methods=['POST'])
+@app.route('/openAI', methods=['GET'])
 def openAI():
     '''
     This method will handle the OpenAI API
     '''
 
-    # Start measuring processing time
-    start_processing_time = time.time()
-
-    # Get input text from the request
-    input_text = request.json.get('input_text', '')
+    # Get input text from the query parameters
+    input_text = request.args.get('input_text', '')
 
     # Get current datetime for the robot's message
     current_datetime = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -54,14 +52,12 @@ def openAI():
     # Get generated text from OpenAI API response
     generated_text = response.choices[0].message.content
 
-    # End processing time measurement
-    end_processing_time = time.time()
-    processing_time = end_processing_time - start_processing_time
-
     # Return generated text as JSON response
     response_json = {
-        'generated_text': generated_text,
-        'processing_time': processing_time
+        'generated_text': generated_text
     }
 
     return jsonify(response_json)
+
+if __name__ == "__main__":
+    app.run()
